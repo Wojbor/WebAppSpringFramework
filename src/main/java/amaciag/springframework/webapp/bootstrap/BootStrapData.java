@@ -5,6 +5,7 @@ import amaciag.springframework.webapp.domain.Book;
 import amaciag.springframework.webapp.domain.Publisher;
 import amaciag.springframework.webapp.repositories.AuthorRespository;
 import amaciag.springframework.webapp.repositories.BookRespository;
+import amaciag.springframework.webapp.repositories.DependecyEx;
 import amaciag.springframework.webapp.repositories.PublisherRespository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -15,11 +16,13 @@ public class BootStrapData implements CommandLineRunner {
     private final AuthorRespository authorRespository;
     private final BookRespository bookRespository;
     private final PublisherRespository publisherRespository;
+    private final DependecyEx dependecyEx;
 
-    public BootStrapData(AuthorRespository authorRespository, BookRespository bookRespository, PublisherRespository publisherRespository) {
+    public BootStrapData(AuthorRespository authorRespository, BookRespository bookRespository, PublisherRespository publisherRespository, DependecyEx dependecyEx) {
         this.authorRespository = authorRespository;
         this.bookRespository = bookRespository;
         this.publisherRespository = publisherRespository;
+        this.dependecyEx = dependecyEx;
     }
 
     @Override
@@ -57,15 +60,18 @@ public class BootStrapData implements CommandLineRunner {
 
         publisher.getBooks().add(noEJB);
 
+
         authorRespository.save(rod);
         bookRespository.save(noEJB);
         publisherRespository.save(publisher);
+
 
 
         System.out.println("Publisher count: " + publisherRespository.count());
         System.out.println("Numbers of Books: " + bookRespository.count());
         System.out.println("Publisher numbers of books: " + publisher.getBooks().size());
         System.out.println(authorRespository.findAll().toString());
+
 
 
 
